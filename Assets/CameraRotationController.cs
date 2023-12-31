@@ -10,8 +10,17 @@ public class CameraRotationController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //targetObject=GameManager.Instance.CharacterController.umaAvatar.gameObject;
+        float horizontalRotation = Input.GetAxis("Mouse X");
+        float verticalRotation = Input.GetAxis("Mouse Y");
+
+        transform.RotateAround(targetObject.transform.position, Vector3.up, horizontalRotation * rotationSpeed * Time.deltaTime);
+        transform.RotateAround(targetObject.transform.position, Vector3.right, verticalRotation * rotationSpeed * Time.deltaTime);
+
+        // Ensure the camera always looks at the target
+        transform.LookAt(targetObject.transform);
     }
+    //targetObject=GameManager.Instance.CharacterController.umaAvatar.gameObject;
+
 
     // Update is called once per frame
     void Update()
